@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,14 +9,20 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        flexibleSpace: const Padding(
-          padding: EdgeInsets.only(left: 40),
-          child: Align(
-            alignment: Alignment.centerLeft,
+        flexibleSpace: Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
             child: SizedBox(
-              width: 200,
-              height: 40,
-              child: LanguageButton(),
+              height: 50,
+              width: 50,
+              child: Row(
+                children: [
+                  const Expanded(child: Icon(Icons.language)),
+                  Expanded(
+                      child: Text(AppLocalizations.of(context)!.localeName)),
+                ],
+              ),
             ),
           ),
         ),
@@ -25,38 +31,12 @@ class HomePage extends StatelessWidget {
           child: SizedBox(),
         ),
       ),
-      body: const Center(
-        child: Text("Home Page"),
+      body: Center(
+        child: Localizations.override(
+          context: context,
+          child: Text(AppLocalizations.of(context)!.helloWorld),
+        ),
       ),
-    );
-  }
-}
-
-class LanguageButton extends StatelessWidget {
-  const LanguageButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Icon(
-              Icons.language,
-              color: Colors.black,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text("Português"),
-          ),
-        ],
-      ),
-      onPressed: () {},
     );
   }
 }

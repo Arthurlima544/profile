@@ -14,7 +14,18 @@ class AppTheme extends ThemeExtension<AppTheme> {
     final secondaryTextTheme = GoogleFonts.montserratTextTheme();
     final textTheme = primaryTextTheme.copyWith(
         displaySmall: secondaryTextTheme.displaySmall);
-    return ThemeData(useMaterial3: true, textTheme: textTheme);
+    return ThemeData(
+      useMaterial3: true,
+      textTheme: textTheme,
+      dropdownMenuTheme: const DropdownMenuThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: Colors.black,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
