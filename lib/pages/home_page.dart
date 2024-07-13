@@ -1,41 +1,158 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        flexibleSpace: Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: SizedBox(
-              height: 50,
-              width: 50,
-              child: Row(
-                children: [
-                  const Expanded(child: Icon(Icons.language)),
-                  Expanded(
-                      child: Text(AppLocalizations.of(context)!.localeName)),
-                ],
-              ),
+      backgroundColor: const Color.fromARGB(255, 104, 102, 102),
+      body: SingleChildScrollView(
+        controller: scrollController,
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Image.asset('assets/profile_foto.jpg', fit: BoxFit.contain),
+                const Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Arthur Lima",
+                      style: TextStyle(fontSize: 60, color: Colors.white),
+                    ),
+                  ),
+                ),
+                const HeaderWidget(),
+              ],
             ),
-          ),
-        ),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(50),
-          child: SizedBox(),
+            const SobrePage(),
+            const ExperienciaPage(),
+            const LinguagemPage(),
+            const ContatoPage(),
+          ],
         ),
       ),
-      body: Center(
-        child: Localizations.override(
-          context: context,
-          child: Text(AppLocalizations.of(context)!.helloWorld),
-        ),
+    );
+  }
+}
+
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const Text("AL", style: TextStyle(fontSize: 30, color: Colors.white)),
+          HeaderButton(title: "Sobre", onPressed: () {}),
+          HeaderButton(title: "Experiencia", onPressed: () {}),
+          HeaderButton(title: "Linguagem", onPressed: () {}),
+          HeaderButton(title: "Contato", onPressed: () {}),
+        ],
+      ),
+    );
+  }
+}
+
+class HeaderButton extends StatelessWidget {
+  final void Function()? onPressed;
+  final String title;
+  const HeaderButton({
+    this.onPressed,
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(title),
+    );
+  }
+}
+
+class SobrePage extends StatelessWidget {
+  const SobrePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: const Row(
+        children: [
+          FlutterLogo(),
+          FlutterLogo(),
+        ],
+      ),
+    );
+  }
+}
+
+class ExperienciaPage extends StatelessWidget {
+  const ExperienciaPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: const Row(
+        children: [
+          FlutterLogo(style: FlutterLogoStyle.markOnly),
+          FlutterLogo(),
+        ],
+      ),
+    );
+  }
+}
+
+class LinguagemPage extends StatelessWidget {
+  const LinguagemPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: const Row(
+        children: [
+          FlutterLogo(style: FlutterLogoStyle.markOnly),
+          FlutterLogo(),
+        ],
+      ),
+    );
+  }
+}
+
+class ContatoPage extends StatelessWidget {
+  const ContatoPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: const Row(
+        children: [
+          FlutterLogo(style: FlutterLogoStyle.markOnly),
+          FlutterLogo(),
+        ],
       ),
     );
   }
